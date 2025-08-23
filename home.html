@@ -15,7 +15,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="bg-[#F4F5F7]">
+<body class="bg-[#F4F5F7] min-h-[100vh]">
     <main class="max-w-[480px] mx-auto">
         <!-- common for bacground -->
         <section class="bg-white pb-4 rounded-2xl">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div>
-                    <button
+                    <button id="btn-log-out"
                         class="text-[#08080880] border-2 rounded-lg border-[#08080860] btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl px-4 py-5"><i
                             class="fa-solid fa-arrow-right-from-bracket "></i>Log Out</button>
                 </div>
@@ -43,13 +43,11 @@
                         charge is low and </p>
                 </div>
                 <div class="grid grid-cols-3 gap-4 mt-4">
-                    <div
-                        class="space-y-2 border-3 border-[#08080810] bg-[#0874F210]  flex flex-col items-center justify-center py-5 px-3 rounded-xl text-[#080808ab] border-box">
+                    <div id="add-money" class="space-y-2 border-3 border-[#08080810] bg-[#0874F210]  flex flex-col items-center justify-center py-5 px-3 rounded-xl text-[#080808ab] border-box">
                         <img src="assets/wallet1.png" alt="">
                         <p>Add Money</p>
                     </div>
-                    <div
-                        class="space-y-2  border-3 border-[#08080810] bg-[#0874F210] flex flex-col items-center justify-center py-5 px-3 rounded-xl text-[#080808ab] border-box">
+                    <div id="cash-out" class="space-y-2  border-3 border-[#08080810] bg-[#0874F210] flex flex-col items-center justify-center py-5 px-3 rounded-xl text-[#080808ab] border-box">
                         <img src="assets/send1.png" alt="">
                         <p>Cashout</p>
                     </div>
@@ -78,7 +76,7 @@
             </section>
         </section>
         <!-- add money section -->
-        <section class="p-4">
+        <section id="add-money-section" class="p-4 hidden">
             <h4 class="font-bold text-xl p-4">Add money</h4>
             <form class="bg-white p-8 w-[full]flex justify-center items-center rounded-3xl">
                 <div class="space-y-3.5">
@@ -118,6 +116,41 @@
 
             
         </section>
+
+
+        <!-- Cashout Section -->
+
+
+        <section id="cash-out-section" class="p-4 hidden">
+            <h4 class="font-bold text-xl p-4">Cash Out</h4>
+            <form class="bg-white p-8 w-[full]flex justify-center items-center rounded-3xl">
+                <div class="space-y-3.5">
+                    
+                    <div>
+                        <label for="" class="font-bold  text-[#08080890]">Agent Number Number</label>
+                        <br>
+                        <input id="agent-number" type="text" placeholder="Enter 11 digit agent number"
+                            class="input bg-[#F4F5F7] w-full rounded-4xl mt-3 p-6 " />
+                    </div>
+                    <div>
+                        <label for="" class="font-bold  text-[#08080890]">Amount</label>
+                        <br>
+                        <input id="withdraw-amount" type="text" placeholder="Enter Amount to Withdraw"
+                            class="input bg-[#F4F5F7] w-full rounded-4xl mt-3 p-6" />
+                    </div>
+                    <div>
+                        <label for="" class="font-bold  text-[#08080890]">Pin Number</label>
+                        <br>
+                        <input id="pin-num-agent" type="text" placeholder="Enter 4 digit pin number"
+                            class="input bg-[#F4F5F7] w-full rounded-4xl mt-3 p-6" />
+                    </div>
+                    <button id="btn-withdraw-money" class="btn bg-[#0874F2] w-full text-white rounded-4xl p-6">Withdraw Money</button>
+                </div>
+            </form>
+
+            
+        </section>
+
 
     </main>
     <script src="assets/home.js"></script>
