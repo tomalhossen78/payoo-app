@@ -1,17 +1,40 @@
 const validPin = 1234;
 const coupon = 1212;
 const cuponAmount = 500;
-// capture add money btn
+// getInputNumber function
+
+function getInputNumber(id) {
+    const accountNumber = document.getElementById(id).value;
+    return accountNumber;
+}
+
+// getInputValue function and pin number
+function getInputValue(id) {
+    const amount = parseInt(document.getElementById(id).value);
+    return amount;
+}
+// getInnerTextNumber Function
+function getInnerTextNumber(id) {
+    const balance = parseInt(document.getElementById(id).innerText);
+    return balance;
+}
+// set inner text
+
+function setInnerText(value) {
+    const balance = document.getElementById('available-balance').innerText = value;
+    return balance;
+}
+
+
 
 document.getElementById('btn-add-money').addEventListener('click', function (event) {
     event.preventDefault();
     // capture bank input
-    const bank = document.getElementById('select-bank').value;
-    const accountNumber = document.getElementById('bank-account-number').value;
-    const addAmount = parseInt(document.getElementById('add-amount').value);
-    const pin = parseInt(document.getElementById('pin-num').value);
-    console.log(bank, accountNumber, addAmount, pin);
-    const availableBalance = parseInt(document.getElementById('available-balance').innerText)
+    // const bank = document.getElementById('select-bank').value;
+    const accountNumber = getInputNumber('bank-account-number');
+    const addAmount = getInputValue('add-amount');
+    const pin = getInputValue('pin-num');
+    const availableBalance = getInnerTextNumber('available-balance');
 
 
 
@@ -25,7 +48,7 @@ document.getElementById('btn-add-money').addEventListener('click', function (eve
         return;
     }
     const totalBalance = availableBalance + addAmount;
-    document.getElementById('available-balance').innerText = totalBalance;
+    setInnerText(totalBalance);
 
     // call the function for tracsaction;
     addTransaction('Add Money', addAmount);
@@ -52,10 +75,10 @@ document.getElementById('btn-log-out').addEventListener('click', function () {
 
 document.getElementById('btn-withdraw-money').addEventListener('click', function (event) {
     event.preventDefault();
-    const withdrawAmount = parseInt(document.getElementById('withdraw-amount').value);
-    const availableBalance = parseInt(document.getElementById('available-balance').innerText)
-    const agentNumber = document.getElementById('agent-number').value;
-    const pin = parseInt(document.getElementById('pin-num-agent').value);
+    const withdrawAmount = getInputValue('withdraw-amount');
+    const availableBalance = getInnerTextNumber('available-balance')
+    const agentNumber = getInputNumber('agent-number');
+    const pin = getInputValue('pin-num-agent');
 
 
     if (agentNumber.length !== 11) {
@@ -72,7 +95,7 @@ document.getElementById('btn-withdraw-money').addEventListener('click', function
         return;
     }
     const totalBalance = availableBalance - withdrawAmount;
-    document.getElementById('available-balance').innerText = totalBalance;
+    setInnerText(totalBalance);
     // call the function
     addTransaction('Cash Out', withdrawAmount);
 
@@ -92,10 +115,10 @@ document.getElementById('btn-withdraw-money').addEventListener('click', function
 
 document.getElementById('btn-tranfer-money').addEventListener('click', function (event) {
     event.preventDefault();
-    const transferAmount = parseInt(document.getElementById('tranfer-amount').value);
-    const availableBalance = parseInt(document.getElementById('available-balance').innerText)
-    const userNumber = document.getElementById('user-account-number').value;
-    const pin = parseInt(document.getElementById('pin-num-user').value);
+    const transferAmount = getInputValue('tranfer-amount');
+    const availableBalance = getInnerTextNumber('available-balance');
+    const userNumber = getInputNumber('user-account-number');
+    const pin = getInputValue('pin-num-user');
 
 
     if (userNumber.length !== 11) {
@@ -112,7 +135,7 @@ document.getElementById('btn-tranfer-money').addEventListener('click', function 
         return;
     }
     const totalBalance = availableBalance - transferAmount;
-    document.getElementById('available-balance').innerText = totalBalance;
+    setInnerText(totalBalance);
 
     //call the function
     addTransaction('Send Money', transferAmount);
@@ -130,14 +153,14 @@ document.getElementById('btn-tranfer-money').addEventListener('click', function 
 
 document.getElementById('btn-get-bonus').addEventListener('click', function (event) {
     event.preventDefault();
-    const bonusCoupon = parseInt(document.getElementById('bonus-coupon-number').value);
-    const availableBalance = parseInt(document.getElementById('available-balance').innerText)
+    const bonusCoupon = getInputValue('bonus-coupon-number');
+    const availableBalance = getInnerTextNumber('available-balance');
     if (bonusCoupon != coupon) {
         alert('Please Enter the Valid Coupon Number');
         return;
     }
     const totalBalance = availableBalance + cuponAmount;
-    document.getElementById('available-balance').innerText = totalBalance;
+    setInnerText(totalBalance);
 
     // call the function for tracsaction;
     addTransaction('Get Bonus', cuponAmount);
@@ -152,12 +175,12 @@ document.getElementById('btn-get-bonus').addEventListener('click', function (eve
 document.getElementById('btn-pay-bill').addEventListener('click', function (event) {
     event.preventDefault();
 
-    // capture bank input
-    const bank = document.getElementById('select-Bill').value;
-    const billerAccountNumber = document.getElementById('biller-account-number').value;
-    const AmountPay = parseInt(document.getElementById('amount-pay').value);
-    const pinNumPay = parseInt(document.getElementById('pin-num-pay').value);
-    const availableBalance = parseInt(document.getElementById('available-balance').innerText)
+
+    // const bank = document.getElementById('select-Bill').value;
+    const billerAccountNumber = getInputNumber('biller-account-number');
+    const AmountPay = getInputValue('amount-pay');
+    const pinNumPay = getInputValue('pin-num-pay');
+    const availableBalance = getInnerTextNumber('available-balance');
 
 
 
@@ -171,7 +194,7 @@ document.getElementById('btn-pay-bill').addEventListener('click', function (even
         return;
     }
     const totalBalance = availableBalance - AmountPay;
-    document.getElementById('available-balance').innerText = totalBalance;
+    setInnerText(totalBalance);
 
     // call the function for tracsaction;
     addTransaction('Pay Bill', AmountPay);
@@ -193,70 +216,85 @@ document.getElementById('btn-log-out').addEventListener('click', function () {
     console.log('logout btn clicked')
 })
 
+// funtion for toggle button
+function handleToggle(id){
+    const options = document.getElementsByClassName('option');
+    for (const option of options) {
+        console.log(option);
+        option.classList.remove('bg-[#0874F210]','border-[#0874F2]','font-bold','text-blue-500');
+        option.classList.add('border-[#08080810]');
+    }
+    document.getElementById(id).classList.remove('border-[#08080810]');
+    document.getElementById(id).classList.add('bg-[#0874F210]','border-[#0874F2]','font-bold','text-blue-500');
+}
 
 
 // add money feature functionality
 
 document.getElementById('add-money').addEventListener('click', function () {
-    document.getElementById('transaction-section').classList.add('hidden');
-    document.getElementById('pay-bill-section').classList.add('hidden');
-    document.getElementById('get-bonus-section').classList.add('hidden');
-    document.getElementById('transfer-money-section').classList.add('hidden');
-    document.getElementById('cash-out-section').classList.add('hidden');
+    
+    handleToggle('add-money');
+
+    const forms = document.getElementsByClassName('form');
+    for (const form of forms) {
+        form.classList.add('hidden');
+    }
+
     document.getElementById('add-money-section').classList.remove('hidden');
 })
 
 // cashout feature functionality
 document.getElementById('cash-out').addEventListener('click', function () {
-    document.getElementById('transaction-section').classList.add('hidden');
-    document.getElementById('pay-bill-section').classList.add('hidden');
-    document.getElementById('get-bonus-section').classList.add('hidden');
-    document.getElementById('transfer-money-section').classList.add('hidden');
+   handleToggle('cash-out');
+    const forms = document.getElementsByClassName('form');
+    for (const form of forms) {
+        form.classList.add('hidden');
+    }
     document.getElementById('cash-out-section').classList.remove('hidden');
-    document.getElementById('add-money-section').classList.add('hidden');
+
 })
 // Transfer Money feature functionality
 document.getElementById('transfer-money').addEventListener('click', function () {
-    document.getElementById('transaction-section').classList.add('hidden');
-    document.getElementById('pay-bill-section').classList.add('hidden');
-    document.getElementById('get-bonus-section').classList.add('hidden');
+   handleToggle('transfer-money');
+    const forms = document.getElementsByClassName('form');
+    for (const form of forms) {
+        form.classList.add('hidden');
+    }
     document.getElementById('transfer-money-section').classList.remove('hidden');
-    document.getElementById('cash-out-section').classList.add('hidden');
-    document.getElementById('add-money-section').classList.add('hidden');
+
 })
 
 // get bounus functionality
 
 document.getElementById('get-bonus').addEventListener('click', function () {
-
-    document.getElementById('transaction-section').classList.add('hidden');
-    document.getElementById('pay-bill-section').classList.add('hidden');
+    handleToggle('get-bonus');
+    const forms = document.getElementsByClassName('form');
+    for (const form of forms) {
+        form.classList.add('hidden');
+    }
     document.getElementById('get-bonus-section').classList.remove('hidden');
-    document.getElementById('transfer-money-section').classList.add('hidden');
-    document.getElementById('cash-out-section').classList.add('hidden');
-    document.getElementById('add-money-section').classList.add('hidden');
+
 })
 // pay bill functionality
 
 document.getElementById('pay-bill').addEventListener('click', function () {
-
-    document.getElementById('transaction-section').classList.add('hidden');
+   handleToggle('pay-bill');
+    const forms = document.getElementsByClassName('form');
+    for (const form of forms) {
+        form.classList.add('hidden');
+    }
     document.getElementById('pay-bill-section').classList.remove('hidden');
-    document.getElementById('get-bonus-section').classList.add('hidden');
-    document.getElementById('transfer-money-section').classList.add('hidden');
-    document.getElementById('cash-out-section').classList.add('hidden');
-    document.getElementById('add-money-section').classList.add('hidden');
 })
 // transaction functionality
 
 document.getElementById('transactions').addEventListener('click', function () {
-
+    handleToggle('transactions');   
+    const forms = document.getElementsByClassName('form');
+    for (const form of forms) {
+        form.classList.add('hidden');
+    }
     document.getElementById('transaction-section').classList.remove('hidden');
-    document.getElementById('pay-bill-section').classList.add('hidden');
-    document.getElementById('get-bonus-section').classList.add('hidden');
-    document.getElementById('transfer-money-section').classList.add('hidden');
-    document.getElementById('cash-out-section').classList.add('hidden');
-    document.getElementById('add-money-section').classList.add('hidden');
+
 })
 
 
