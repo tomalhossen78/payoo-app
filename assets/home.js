@@ -24,6 +24,22 @@ document.getElementById('btn-add-money').addEventListener('click',function(even)
     }
     const totalBalance = availableBalance + addAmount;
     document.getElementById('available-balance').innerText=totalBalance;
+
+    // transaction feature
+
+    const transactionElement = document.getElementById('transaction');
+    console.log(transactionElement);
+    // get the parent node
+    const transactionContainer = document.getElementById('transaction-container');
+    console.log(transactionContainer);
+    // create transaction and add inner text
+
+    const transaction = document.cr;
+    transaction.innerHTML= 
+    console.log(transaction);
+
+
+
     
 
 
